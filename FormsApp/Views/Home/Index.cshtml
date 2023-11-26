@@ -1,8 +1,39 @@
-﻿@{
+﻿@model IEnumerable<Product>
+@{
     ViewData["Title"] = "Home Page";
 }
+@* table-striped -> satırların rengi farklı olmasını sağlıyor *@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            @*  Product propertylerin isimlerini almak için *@
+            @*@model IEnumerable<Product> kullanıldı*@            
+            <th style="width:100px" >@Html.DisplayNameFor(m => m.ProductId)</th>
+            <th style="width:100px">@Html.DisplayNameFor(m => m.Image)</th>
+            <th>@Html.DisplayNameFor(m => m.Name)</th>
+            <th style="width:100px">@Html.DisplayNameFor(m => m.Price)</th>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prod in Model)
+        {
+            <tr>
+                <td class="Table-index" >@prod.ProductId</td>
+                <td class="Table-index">
+                    @* class="img-fluid" resmin tam sığması için *@
+                    <img src="~/img/@prod.Image" class="img-fluid" alt="" >
+                </td>
+                <td class="Table-index">@prod.Name</td>
+                <td class="Table-index">@prod.Price</td>
+
+                <td class="Table-index">
+                    <a href="" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="" class="btn btn-sm btn-danger">Delete</a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
