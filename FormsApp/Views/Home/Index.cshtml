@@ -11,7 +11,7 @@
                     <select 
                         name="category" 
                         class="form-select" 
-                        asp-items="@(new SelectList(Model.Categories," CategoryId","Name", Model.SelectedCategory))">
+                        asp-items="@(new SelectList(Model.Categories,"CategoryId","Name", Model.SelectedCategory))">
                         <option value="0">Hepsi</option>
                     </select>
                 </div>
@@ -41,7 +41,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var prod in Model.Products)
+        @foreach (var prod in @Model.Products)
         {
             <tr>
                 <td class="Table-index" >@prod.ProductId</td>
