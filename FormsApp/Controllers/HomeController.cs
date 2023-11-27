@@ -21,6 +21,10 @@ namespace FormsApp.Controllers
             //Eğer searchString boş değilse yani urle bir değer girilmişse bir filtreleme yap
             if (!String.IsNullOrEmpty(searchString))
             {
+
+                //arama yapılan string ifade, arama yapıldıktan sora da kalsın diye yakalandı
+                ViewBag.SearchString = searchString;
+
                 //eğer searchString gelen ürünler arasında varsa bu ürünleri liste olarak dön
                 //küçük büyük harf duyarlı old. için Name önce küçük harfe çevrildi
                 products = products.Where(p => p.Name.ToLower().Contains(searchString)).ToList();
