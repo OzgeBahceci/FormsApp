@@ -31,6 +31,11 @@
             }
         }
 
+        public static void CreateProduct(Product product)
+        {
+            _products.Add(product);
+        }
+
         public static List<Category> Categories
         {
             //private olan _products böylelikle public olup sadece get methodu yazıldı
