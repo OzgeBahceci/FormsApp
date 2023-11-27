@@ -33,15 +33,15 @@ namespace FormsApp.Controllers
             }
 
             //Kategory için filtreleme eğer 0(hepsi) seçilmedikçe
-            if (!String.IsNullOrEmpty(category) && category!="0")
+            if (!String.IsNullOrEmpty(category) && category != "0")
             {
                 // gelen id'ye eşitse o kategoriye ait ürünleri döndür
-                products = products.Where(p => p.CategoryId== int.Parse(category)).ToList();
+                products = products.Where(p => p.CategoryId == int.Parse(category)).ToList();
             }
 
             //Görünen Name ama CategoryId'ye göre işlem yapılacak
             //4. parametre olan category arama yapıldıktan sonra ekranda göstermek için
-           // ViewBag.Categories = new SelectList(Repository.Categories,"CategoryId","Name", category);
+            // ViewBag.Categories = new SelectList(Repository.Categories,"CategoryId","Name", category);
 
 
             var model = new ProductViewModel
@@ -68,16 +68,18 @@ namespace FormsApp.Controllers
         {
             var extension = Path.GetExtension(imageFile.FileName); //abc.jpg -> jpg kısmını alır
             //random isim oluştu ve extension kısmı eklendi, random vermezsen ismi kontrol etmen lazım
-            var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}"); 
-            var path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/img", randomFileName); // resmin kaydedileceği adres
+            var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName); // resmin kaydedileceği adres
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                using(var stream = new FileStream(path, FileMode.Create))
+                if (imageFile != null)
                 {
-                    await imageFile.CopyToAsync(stream);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
                 }
-
                 model.Image = randomFileName; // ismini modele ver
 
                 //içerideki sayının bir fazlasını id olarak ver 
@@ -92,6 +94,28 @@ namespace FormsApp.Controllers
 
             //eğer hata varsa view'a gönder ama model ile birilikte girilimiş dataları da yazdır
             return View(model);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();// 404 sayfasına yönlendirme
+            }
+
+            //id null değilse
+            var entity = Repository.Products.FirstOrDefault(p => p.ProductId == id);// yukarıda gönderdiğimiz id eşleşiyorsa
+            if (entity == null)
+            {
+                return NotFound();// 404 sayfasına yönlendirme
+            }
+
+            // eğer entity varsa view'a gönder
+
+            //Kategori içeriği dolu gelsin
+            ViewBag.Categories = new SelectList(Repository.Categories, "CategoryId", "Name");
+
+            return View(entity);
         }
     }
 }
