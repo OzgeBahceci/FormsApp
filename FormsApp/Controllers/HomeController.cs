@@ -40,11 +40,20 @@ namespace FormsApp.Controllers
             }
 
             //Görünen Name ama CategoryId'ye göre işlem yapılacak
-            ViewBag.Categories = new SelectList(Repository.Categories,"CategoryId","Name");
+            //4. parametre olan category arama yapıldıktan sonra ekranda göstermek için
+           // ViewBag.Categories = new SelectList(Repository.Categories,"CategoryId","Name", category);
+
+
+            var model = new ProductViewModel
+            {
+                Products = products,
+                Categories = Repository.Categories,
+                SelectedCategory = category
+            };
 
 
             //buraya alınan ürünler gönderiliyor 
-            return View(products);
+            return View(model);
         }
 
         public IActionResult Privacy()
