@@ -13,12 +13,16 @@ namespace FormsApp.Controllers
 
         }
 
-        //buradaki string searchString url'de q=iphone olarak kullanılacak
-        //string category ile category bilgisi alındı
+
         public IActionResult Index(string searchString, string category)
         {
-            //Tüm productslar alındı
-            var products = Repository.Products;
+			//buradaki string searchString url'de q=iphone olarak kullanılacak
+			//string category ile category bilgisi alındı
+
+
+
+			//Tüm productslar alındı
+			var products = Repository.Products;
 
             //Eğer searchString boş değilse yani urle bir değer girilmişse bir filtreleme yap
             if (!String.IsNullOrEmpty(searchString))
@@ -63,10 +67,10 @@ namespace FormsApp.Controllers
         }
 
         [HttpPost]
-        //IFormFile formFile resmi almak için
         public async Task<IActionResult> Create(Product model, IFormFile imageFile)
         {
-            var extension = Path.GetExtension(imageFile.FileName); //abc.jpg -> jpg kısmını alır
+			//IFormFile formFile resmi almak için
+			var extension = Path.GetExtension(imageFile.FileName); //abc.jpg -> jpg kısmını alır
             //random isim oluştu ve extension kısmı eklendi, random vermezsen ismi kontrol etmen lazım
             var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName); // resmin kaydedileceği adres
@@ -116,6 +120,12 @@ namespace FormsApp.Controllers
             ViewBag.Categories = new SelectList(Repository.Categories, "CategoryId", "Name");
 
             return View(entity);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Product model, IFormFile imageFile) 
+        {
+            return 
         }
     }
 }
