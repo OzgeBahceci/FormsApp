@@ -58,7 +58,7 @@ namespace FormsApp.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Categories = Repository.Categories;
+            ViewBag.Categories = new SelectList(Repository.Categories, "CategoryId", "Name");
             return View();
         }
 

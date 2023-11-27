@@ -1,28 +1,28 @@
-﻿@{
+﻿@model Product
+@{
     ViewData["Title"] = "Create";
 }
-<form action="/Home/Create" method="post">
+<form asp-controller="Home" asp-action="Create" method="post">
     <div class="mb-3">
-        <label for="Name" class="form-label">Name</label>
-        <input type="text" name="Name" id="Name" class="form-control" />
+        @* Labeller arası name bilgisi silindi çünkü asp- ile gliyor tekrar yazmaya gerek yok *@
+        @* type="text" name="Image" id="Image" bunları tanımlamaya gerek yok çünkü input asp-for="Image" ile geliyor  *@
+        <label asp-for="Name" class=" form-label"></label>
+        <input asp-for="Name" class="form-control" />
     </div>
     <div class="mb-3">
-        <label for="Price" class="form-label">Fiyat</label>
-        <input type="text" name="Price" id="Price" class="form-control" />
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
     </div>
     <div class="mb-3">
-        <label for="Image" class="form-label">Resim</label>
-        <input type="text" name="Image" id="Image" class="form-control" />
+        <label asp-for="Image" class="form-label"></label>
+        <input asp-for="Image" class="form-control" />
     </div>
     <div class="mb-3">
-        <label for="CategoryId" class="form-label">Kategory</label>
-        <select name="CategoryId" id="CategoryId" class="form-select">
-            <option value="0">Hepsi</option>
-            @foreach (var item in ViewBag.Categories)
-            {
-                <option value="@item.CategoryId">@item.Name</option>
 
-            }
+        @* asp-items="ViewBag.Categories" ile kategori bilgileri alındı *@
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
+            <option value="">Hepsi</option>
         </select>
     </div>
     <div class="mb-3 form-check">
