@@ -56,7 +56,14 @@ namespace FormsApp.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Create()
+        {
+            ViewBag.Categories = Repository.Categories;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product model)
         {
             return View();
         }
