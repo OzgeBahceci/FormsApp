@@ -1,5 +1,6 @@
 ﻿using FormsApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 
 namespace FormsApp.Controllers
@@ -13,7 +14,8 @@ namespace FormsApp.Controllers
         }
 
         //buradaki string searchString url'de q=iphone olarak kullanılacak
-        public IActionResult Index(string searchString)
+        //string category ile category bilgisi alındı
+        public IActionResult Index(string searchString, string category)
         {
             //Tüm productslar alındı
             var products = Repository.Products;
@@ -29,6 +31,17 @@ namespace FormsApp.Controllers
                 //küçük büyük harf duyarlı old. için Name önce küçük harfe çevrildi
                 products = products.Where(p => p.Name.ToLower().Contains(searchString)).ToList();
             }
+
+            //Kategory için filtreleme eğer 0(hepsi) seçilmedikçe
+            if (!String.IsNullOrEmpty(category) && category!="0")
+            {
+                // gelen id'ye eşitse o kategoriye ait ürünleri döndür
+                products = products.Where(p => p.CategoryId== int.Parse(category)).ToList();
+            }
+
+            //Görünen Name ama CategoryId'ye göre işlem yapılacak
+            ViewBag.Categories = new SelectList(Repository.Categories,"CategoryId","Name");
+
 
             //buraya alınan ürünler gönderiliyor 
             return View(products);
