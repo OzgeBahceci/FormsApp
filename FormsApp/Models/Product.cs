@@ -10,10 +10,10 @@ namespace FormsApp.Models
 
         //public string? Name { get; set; } ile aynı
         [Display(Name = "Ürün Adı")]
-        [Required(ErrorMessage= "Gerekli bir alan")]
+        [Required(ErrorMessage = "Gerekli bir alan")]
         //maks 100 karakterlik bir isim
         [StringLength(100)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = null!; // null olmayacak eminim
 
         [Required]
         [Range(0,100000)]

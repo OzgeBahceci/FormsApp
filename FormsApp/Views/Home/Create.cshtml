@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Create";
 }
-<form asp-controller="Home" asp-action="Create" method="post">
+@* enctype="multipart/form-data" hem text hem de file içeriğini alma (hem text hem resim)*@
+<form asp-controller="Home" asp-action="Create" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="All"></div>
     <div class="mb-3">
         @* Labeller arası name bilgisi silindi çünkü asp- ile gliyor tekrar yazmaya gerek yok *@
@@ -17,10 +18,8 @@
         <span asp-validation-for="Price"></span>
 
     </div>
-    <div class="mb-3">
-        <label asp-for="Image" class="form-label"></label>
-        <input asp-for="Image" class="form-control" />
-        <span asp-validation-for="Image"></span>
+    <div class="input-group mb-3">
+        <input type="file" name="imageFile" id="imageFile" class="form-control"/>
 
     </div>
     <div class="mb-3">

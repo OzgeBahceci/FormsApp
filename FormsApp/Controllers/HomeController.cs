@@ -63,7 +63,8 @@ namespace FormsApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product model)
+        //IFormFile formFile resmi almak için
+        public IActionResult Create(Product model, IFormFile imageFile)
         {
             if(ModelState.IsValid)
             {
