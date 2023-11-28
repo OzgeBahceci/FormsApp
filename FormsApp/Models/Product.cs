@@ -1,37 +1,35 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FormsApp.Models
 {
     public class Product
     {
-        //İsmini çekerken görünecek olan isim
-        [Display(Name = "Ürün Id")]
+        [Display(Name="Urun Id")]
         public int ProductId { get; set; }
-
-        //public string? Name { get; set; } ile aynı
-        [Display(Name = "Ürün Adı")]
+        
         [Required(ErrorMessage = "Gerekli bir alan")]
-        //maks 100 karakterlik bir isim
         [StringLength(100)]
-        public string Name { get; set; } = null!; // null olmayacak eminim
+        [Display(Name="Urun Adı")]
+        public string Name { get; set; } = null!;
 
         [Required]
-        [Range(0,100000)]
-        [Display(Name = "Fiyatı")]
+        [Range(0, 100000)]
+        [Display(Name="Fiyat")]
         public decimal? Price { get; set; }
 
-        
-        [Display(Name = "Resim")]
-        public string? Image { get; set; }
-
-
-        [Display(Name = "Aktif mi?")]
+        [Display(Name="Resim")]
+        public string? Image { get; set; } = string.Empty;
         public bool IsActive { get; set; }
 
+        [Display(Name="Category")]
+        
         [Required]
-        [Display(Name = "Kategori")]
-        //Hangi ürün hangi kategoriye ait
         public int? CategoryId { get; set; }
 
     }
 }
+
+// 1 iphone 14 1
+// 2 iphone 15 1

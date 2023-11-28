@@ -24,13 +24,11 @@
                         </li>
                     </ul>
                 </div>
-                @* Burası sayfadaki ürünleri filtreleyerek arama yapılmasını sağlar *@
-                @* d-flex alt alta sıralanmasını sağlar *@
-                @* value="@ViewBag.searchString" ile son arama yapılan değer ekrana yazdırıldı *@
-                <form class="d-flex" asp-action="Index" method ="get">
-                    <input type="search" class="form-control me-2"name="searchString" placeholder="Anahtar Kelime"  value="@ViewBag.searchString"/>
+                <form class="d-flex" asp-action="Index" method="get">
+                    <input type="search" class="form-control me-2" name="searchString" value="@ViewBag.SearchString" placeholder="Anahtar Kelime">
                     <button type="submit" class="btn btn-primary">Ara</button>
                 </form>
+
             </div>
         </nav>
     </header>
