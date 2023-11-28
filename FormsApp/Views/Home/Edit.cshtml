@@ -1,10 +1,11 @@
 ﻿@model Product
 @{
-	ViewData["Title"] = "Create";
+	ViewData["Title"] = "Edit";
 }
 @* enctype="multipart/form-data" hem text hem de file içeriğini alma (hem text hem resim)*@
 <form asp-controller="Home" asp-action="Edit" method="post" enctype="multipart/form-data">
 	<div asp-validation-summary="All"></div>
+	<input type="hidden" asp-for="ProductId" /> @* post edildiğinde id'yi alabilmek için, hangi idli product güncellenecek*@
 	<div class="mb-3">
 		@* Labeller arası name bilgisi silindi çünkü asp- ile gliyor tekrar yazmaya gerek yok *@
 		@* type="text" name="Image" id="Image" bunları tanımlamaya gerek yok çünkü input asp-for="Image" ile geliyor  *@
@@ -24,7 +25,7 @@
 	<div>
 		<img src="~/img/@Model.Image" alt="" style="width:100px;" />
 		<input type="hidden" asp-for="@Model.Image" /> @* sayfa post ediliğinde resim tekrar gönderilmesini sağlar *@
- 	</div>
+	</div>
 	<div class="mb-3">
 
 		@* asp-items="ViewBag.Categories" ile kategori bilgileri alındı *@

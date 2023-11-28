@@ -45,5 +45,23 @@
                 return _categories;
             }
         }
-    }
+
+        public static void EditProduct(Product updatedProduct)
+        {
+			//updatedProduct güncellenmiş product nesnesi
+			// bu id tüm product listesinde ara eşleşeni geri döndür
+			var entity = _products.FirstOrDefault(p => p.ProductId == updatedProduct.ProductId);
+			if (entity != null)
+			{
+				if (!string.IsNullOrEmpty(updatedProduct.Name))
+				{
+					entity.Name = updatedProduct.Name;
+				}
+				entity.Price = updatedProduct.Price;
+				entity.Image = updatedProduct.Image;
+				entity.CategoryId = updatedProduct.CategoryId;
+				entity.IsActive = updatedProduct.IsActive;
+			}
+		}
+	}
 }
